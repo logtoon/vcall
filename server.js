@@ -1,3 +1,6 @@
+var express = require('express');
+var app = express();
+
 // determining the port
 var port = Number(process.env.PORT || '3000');
 
@@ -7,11 +10,9 @@ var server = app.listen(port, function() {
 
 // peerjs server setup
 var peerServer = ExpressPeerServer(server);
-app.use('/app', peerServer);
+app.use('/peerjs', peerServer);
 peerServer.on('connection', function(id) { console.log(id); });
 
-var express = require('express');
-var app = express();
 
 //setting port
 var port2 = process.env.PORT || 8080
