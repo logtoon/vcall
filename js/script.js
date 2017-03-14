@@ -6,7 +6,7 @@ $(function(){
 
   var peer = new Peer({
     host: '/',
-    port: 443,
+    port: '',
    path: '/peerjs',
     /* debug: 3,
     config: {'iceServers': [
