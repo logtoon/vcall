@@ -1,21 +1,13 @@
 {
-
-	"name":"nodetest",
-	"version":"1.0.0",
-	
-	"scripts":{
-		"start":"node script.js"
-		
-	},
-
-	"dependencies":{
-
-		"express":"4.13.3"
-	},
-
-
-	"author":"Ravi",
-	"License":"ISC"
-
-
+  "name": "nodetest",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node script.js"
+  },
+  "dependencies": {
+    "express": "4.13.3",
+    "peer": "^0.2.8"
+  },
+  "author": "Ravi",
+  "License": "ISC"
 }
