@@ -5,10 +5,10 @@ $(function(){
   var messages_template = Handlebars.compile($('#messages-template').html());
 
   var peer = new Peer({
-    host: '/',
-    port: '',
-   path: '/peerjs',
-    /* debug: 3,
+    host: location.hostname,
+    port: location.port || (location.protocol === 'https:' ? 443 : 80),
+   path: '/peerjs'
+   /*debug: 3,
     config: {'iceServers': [
     { url: 'stun:stun1.l.google.com:19302' },
     { url: 'turn:numb.viagenie.ca',

@@ -21,4 +21,8 @@ app.listen(port,function(){
 	
 
 //var server = PeerServer({port: port, path: '/peerjs'});
+srv = app.listen(process.env.PORT)
+app.use('/peerjs', require('peer').ExpressPeerServer(srv, {
+	debug: true
+}))
 	
