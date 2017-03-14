@@ -20,5 +20,5 @@ app.listen(port,function(){
 	})	
 	
 
-var server = PeerServer({port: port, path: '/peerjs'});
+//var server = PeerServer({port: port, path: '/peerjs'});
 	
