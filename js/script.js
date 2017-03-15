@@ -8,12 +8,12 @@ $(function(){
     host: location.hostname,
     port: location.port || (location.protocol === 'https:' ? 443 : 80),
    path: '/peerjs',
-   /*debug: 3,
+   debug: 3,
     config: {'iceServers': [
     { url: 'stun:stun1.l.google.com:19302' },
     { url: 'turn:numb.viagenie.ca',
       credential: 'muazkh', username: 'webrtc@live.com' }
-    ]}*/
+    ]}
   });
 
   peer.on('open', function(){
