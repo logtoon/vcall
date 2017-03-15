@@ -23,7 +23,7 @@ $(function(){
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||  navigator.mozGetUserMedia;
 
   function getVideo(callback){
-    navigator.getUserMedia({audio: true, video: true}, callback, function(error){
+    navigator.getUserMedia({audio: false, video: true}, callback, function(error){
       console.log(error);
       alert('An error occured. Please try again');
     });
@@ -38,7 +38,7 @@ $(function(){
     var video = $('#' + element_id + ' video')[0];
     video.src = window.URL.createObjectURL(stream);
     window.peer_stream = stream;
-	video.play();
+	//video.play();
   }
 
   $('#login').click(function(){
