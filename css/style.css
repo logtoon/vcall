@@ -72,6 +72,16 @@ ul#messages li {
   height: 350px;
 }
 
+.login_page{
+	float:none !important;
+	margin:100px auto;
+	}
+	
+.login_page span{
+	margin:10px 0;
+	float:left;
+	}	
+
 @media screen and (max-width: 800px){
   #wrapper {
     width: 100%;

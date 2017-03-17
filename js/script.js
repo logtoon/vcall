@@ -1,10 +1,12 @@
 $(function(){
 
+	
   var messages = [];
   var peer_id, name, conn;
   var messages_template = Handlebars.compile($('#messages-template').html());
+  var user_id=window.location.href.split("user_id=");
 
-  var peer = new Peer({
+  var peer = new Peer(user_id[1],{
     host: location.hostname,
     port: location.port || (location.protocol === 'https:' ? 443 : 80),
    path: '/peerjs',
@@ -22,24 +24,10 @@ $(function(){
 
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||  navigator.mozGetUserMedia;
 
-  function getVideo(callback){
-    navigator.getUserMedia({audio: true, video: true}, callback, function(error){
-      console.log(error);
-      alert('An error occured. Please try again');
-    });
-  }
-
   getVideo(function(stream){
     window.localStream = stream;
     onReceiveStream(stream, 'my-camera');
   });
-
-  function onReceiveStream(stream, element_id){
-    var video = $('#' + element_id + ' video')[0];
-    video.src = window.URL.createObjectURL(stream);
-    window.peer_stream = stream;
-	//video.play();
-  }
 
   $('#login').click(function(){
     name = $('#name').val();
@@ -65,28 +53,6 @@ $(function(){
     $('#connected_peer').text(connection.metadata.username);
   });
 
-  function handleMessage(data){
-    var header_plus_footer_height = 285;
-    var base_height = $(document).height() - header_plus_footer_height;
-    var messages_container_height = $('#messages-container').height();
-    messages.push(data);
-
-    var html = messages_template({'messages' : messages});
-    $('#messages').html(html);
-
-    if(messages_container_height >= base_height){
-      $('html, body').animate({ scrollTop: $(document).height() }, 500);
-    }
-  }
-
-  function sendMessage(){
-    var text = $('#message').val();
-    var data = {'from': name, 'text': text};
-
-    conn.send(data);
-    handleMessage(data);
-    $('#message').val('');
-  }
 
   $('#message').keypress(function(e){
     if(e.which == 13){
@@ -109,6 +75,47 @@ $(function(){
   peer.on('call', function(call){
     onReceiveCall(call);
   });
+  
+
+
+  
+  
+function getVideo(callback){
+    navigator.getUserMedia({audio: true, video: true}, callback, function(error){
+      console.log(error);
+      alert('An error occured. Please try again');
+    });
+  } 
+
+function onReceiveStream(stream, element_id){
+    var video = $('#' + element_id + ' video')[0];
+    video.src = window.URL.createObjectURL(stream);
+    window.peer_stream = stream;
+	//video.play();
+  }
+    
+function handleMessage(data){
+    var header_plus_footer_height = 285;
+    var base_height = $(document).height() - header_plus_footer_height;
+    var messages_container_height = $('#messages-container').height();
+    messages.push(data);
+
+    var html = messages_template({'messages' : messages});
+    $('#messages').html(html);
+
+    if(messages_container_height >= base_height){
+      $('html, body').animate({ scrollTop: $(document).height() }, 500);
+    }
+  }
+    
+  function sendMessage(){
+    var text = $('#message').val();
+    var data = {'from': name, 'text': text};
+
+    conn.send(data);
+    handleMessage(data);
+    $('#message').val('');
+  }
 
   function onReceiveCall(call){
     call.answer(window.localStream);
